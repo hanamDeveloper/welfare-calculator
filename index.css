@@ -9,11 +9,13 @@ body {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   width: 25%;
 }
 
 .input_wrapper > div {
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: 4px;
 }
