@@ -1,0 +1,47 @@
+/* 스타일링 */
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.input_wrapper {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+}
+
+.input_wrapper > div {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.input_wrapper > div > label {
+  text-align: right;
+  width: 130px;
+}
+label {
+  font-weight: bold;
+}
+input {
+  padding: 8px;
+  margin: 5px;
+}
+button {
+  padding: 10px 200px;
+  font-size: 16px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+.result {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#totalInvestment,#monthlyProfits {
+    text-align: left;
+}

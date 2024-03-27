@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>투자 계산기</title>
+    <link href="index.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <h1>매달 수익률을 고려한 투자 계산기</h1>
+    <div class="input_wrapper">
+      <div>
+        <label for="investmentAmount">매달 투자할 금액:</label>
+        <input type="number" id="investmentAmount" value="2000000" />
+      </div>
+
+      <div>
+        <label for="monthlyInterest">월별 수익률(%):</label>
+        <input type="number" id="monthlyInterest" value="5" />
+      </div>
+
+      <div>
+        <label for="totalMonths">총 개월 수:</label>
+        <input type="number" id="totalMonths" value="12" />
+      </div>
+    </div>
+
+    <button onclick="calculateInvestment()">계산하기</button>
+
+    <div class="result">
+      <h2>결과</h2>
+      <p id="totalInvestment"></p>
+      <p id="monthlyProfits"></p>
+    </div>
+
+    <script>
+      function calculateTotalInvestment(
+        monthlyInvestment,
+        monthlyInterestRate,
+        months
+      ) {
+        let totalInvestment = 0;
+        let resultDetails = "";
+
+        for (let month = 1; month <= months; month++) {
+          // 이번 달에 얻는 이익 계산
+          const monthlyProfit = totalInvestment * (monthlyInterestRate / 100);
+
+          // 이번 달에 얻은 이익을 총 투자 금액에 더함
+          totalInvestment += monthlyInvestment + monthlyProfit;
+
+          // 결과 디테일에 이번 달 수익 추가
+          resultDetails += ` ${month}월: ${Number(
+            monthlyProfit.toFixed(0)
+          ).toLocaleString()}원 수익 총 금액: ${Number(
+            totalInvestment.toFixed(0)
+          ).toLocaleString()}<br>`;
+        }
+
+        return { totalInvestment, resultDetails };
+      }
+
+      function calculateInvestment() {
+        const investmentAmount = parseInt(
+          document.getElementById("investmentAmount").value
+        );
+        const monthlyInterest = parseInt(
+          document.getElementById("monthlyInterest").value
+        );
+        const totalMonths = parseInt(
+          document.getElementById("totalMonths").value
+        );
+
+        const { totalInvestment, resultDetails } = calculateTotalInvestment(
+          investmentAmount,
+          monthlyInterest,
+          totalMonths
+        );
+        const totalInvestmentElement =
+          document.getElementById("totalInvestment");
+        const total = investmentAmount * totalMonths;
+        const moreMoney = totalInvestment - total;
+        totalInvestmentElement.innerHTML = `<strong>총 금액:</strong> ${Number(
+          totalInvestment.toFixed(0)
+        ).toLocaleString()}원<br/> <strong>총 투자 금액</strong>: ${total.toLocaleString()}원 <br> <strong>총 수익금:</strong> ${Number(
+          moreMoney.toFixed(0)
+        ).toLocaleString()}`;
+
+        const monthlyProfitsElement = document.getElementById("monthlyProfits");
+        monthlyProfitsElement.innerHTML = `<strong>월별 수익 내역</strong><br>${resultDetails}`;
+      }
+    </script>
+  </body>
+</html>
